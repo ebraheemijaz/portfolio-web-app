@@ -715,6 +715,10 @@ main {
   line-height: 1.6;
 }
 
+.timeline-text li {
+  list-style: disc;
+}
+
 .skills-title { margin-bottom: 20px; }
 
 .skills-list { padding: 20px; }

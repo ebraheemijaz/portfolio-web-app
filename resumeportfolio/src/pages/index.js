@@ -5,9 +5,123 @@ import { useState } from 'react'
 import { UpworkLogo } from '@/assets/UpworkIcon';
 import { FiverrLogo } from '@/assets/FiverrLogo';
 
+const reviews = [
+  {
+    img: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/ead61367f279a82e617f85982d9b728f-1605271709863/3fe747bd-af31-40e7-a432-8ca9d4b71bf1.png',
+    name: 'Dibe84',
+    review: 'Coder2(my username on fiverr) did a great job! He understood the requirements perfectly and delivered super quickly. Thanks a lot'
+  },
+  {
+    img: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/960b6b7b608cff1ad48eee84e329d983-1198986541664599469898/JPEG_20221001_014428_5149239765728611381.jpg',
+    name: 'santiagolest804',
+    review: `I recently had the pleasure of working with ebraheem on the Fiverr platform, and I must say that I am
+    thoroughly impressed with the level of expertise and professionalism he brought to the table. Our company,
+    Arpitools, had been struggling with a forgot password issue for our mobile app, and ebraheem was able to
+    quickly diagnose and resolve the problem for us. His communication throughout the process was excellent,
+    keeping us updated on his progress and ensuring that we were satisfied with the end result. He also went
+    above and beyond by offering additional suggestions to improve the overall functionality of our app.
+    I would highly recommend ebraheem to anyone in need of technical support`,
+  },
+  {
+    img: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/960b6b7b608cff1ad48eee84e329d983-1198986541664599469898/JPEG_20221001_014428_5149239765728611381.jpg',
+    name: 'santiagolest804',
+    review: `Ebraheem did an excellent job. We are going to be working with him again on several other projects and improvement to be made in this one as well.`,
+  },
+  {
+    img: 'https://www.upwork.com/profile-portraits/c1f0J7fgjK1Xu2DRMqdxTCKFk6VOYeSN7chL5eHav9OjAdk-1UV4y1Ks5HdjgWBp_q',
+    name: 'Upwork Client',
+    review: `I would like to thank Ebraheem for his awesome job. He does not get upset, annoyed for any of my silly
+    questions. He is very kind and he got so much of patience. He understood the requirement well and he delivers
+    before time. He took ample time to explain the code and very much helpful even after the contract ended.
+    I would definitely consider him for my next project, also i would recommend him for any of my friends for any
+    python projects. He never pushes to pay money ahead or upfront, he is very much professional and had good
+    ethics in him.`
+  },
+]
+
+const previousExperience = [
+  {
+    name: 'Elixir- Senior Full Stack MERN Developer - Full Time - Hybrid',
+    duration: '2022 - 2023',
+    points: [
+      'Worked on enterprise level saas application, and develop new features using React',
+      'Work within the Product Development team, to an Agile methodology.',
+      'Troubleshoot and fix issues in different environments',
+      'Development of reusable components for different web applications',
+      'Code reviews, mentoring, team building',
+      'Wrote End-to-End test case using puppeteer',
+      'Tech Stack => React + Puppeteer + JIRA + Git'
+    ]
+  },
+  {
+    name: '10Pearls- Senior Full Stack MERN Developer - Full Time - Remote',
+    duration: '2020 - 2022',
+    points: [
+      'Migration of existing Monolith webapp to microservices architecture',
+      'Client communication and requirement gathering for new features',
+      'Worked with different clients based in US remotely',
+      'Planning, assignment and tracking of tasks for team members',
+      'Wrote Unit and Integration Tests for APIs',
+      'Work in different micro-services to develop new features',
+      'Wrote REST-ful services for new features',
+      'Wrote End-to-End test case using cypress',
+      'Tech Stack => React + Node + Cypress + MYSQL + JIRA + Git'
+    ]
+  },
+  {
+    name: 'Agency- Full Stack MERN Developer - Full Time - Contract - Remote',
+    duration: '2019 — 2020',
+    points: [
+      'Developed and provided support 5 different web applications',
+      'Integrate different 3rd party services as per business needs',
+      'Deploy applications in AWS Cloud and test in different environments',
+      'Communicate with Project Manager and Client to gather requirements',
+      'Design and develop application workflows end-to-end, with high-scalability in mind',
+      'Code reviews, mentoring, team building',
+      'Tech Stack => React + Node + Mongo + Express + Git'
+    ]
+  },
+  {
+    name: 'DSS - Backend Developer - Full Time - Onsite',
+    duration: '2017 — 2019',
+    points: [
+      'Learn and adopt new frameworks, tools and technologies mainly in Python and Node',
+      'Moving existing web projects and scripts to different hosting platforms if needed',
+      'Designing and development of new services in existing web app',
+      'Provide support for projects that are already in production',
+      'Develop RESTful APIs using Node,Express and connect it with rabbitMQ that initiates python scripts',
+      'Tech Stack => Python + Node + MYSQL + Express + RabbitMQ + + Git'
+    ]
+  }
+]
+
+const skills = [
+  {
+    name: 'React',
+    percentage: '85%'
+  },
+  {
+    name: 'Node (Express)',
+    percentage: '83%'
+  },
+  {
+    name: 'Databases',
+    percentage: '80%'
+  },
+  {
+    name: 'Python',
+    percentage: '70%'
+  },
+  {
+    name: 'Web 3.0',
+    percentage: '40%'
+  }
+]
+
 export default function Home() {
   const [activePage, setActivePage] = useState('about');
   const [showInfo, setShowInfo] = useState(false);
+  const [reviewModal, setReviewModal] = useState(null);
 
   return (
     <>
@@ -79,7 +193,7 @@ export default function Home() {
                 <a target={'_blank'} href="https://www.upwork.com/freelancers/~011a9306f4d36f0027" style={{
                   width: '1em', height: '1em'
                 }} className="social-link">
-                  <div class="icon-inner">
+                  <div className="icon-inner">
                     <UpworkLogo />
                   </div>
                 </a>
@@ -88,7 +202,7 @@ export default function Home() {
                 <a target={'_blank'} href="https://www.fiverr.com/coder2" style={{
                   width: '1em', height: '1em'
                 }} className="social-link">
-                  <div class="icon-inner">
+                  <div className="icon-inner">
                     <FiverrLogo />
                   </div>
                 </a>
@@ -122,7 +236,6 @@ export default function Home() {
             </ul>
 
           </nav>
-
           <article className={`about ${activePage === 'about' ? 'active' : ''}`} data-page="about">
             <header>
               <h2 className="h2 article-title">About me</h2>
@@ -145,7 +258,6 @@ export default function Home() {
                 experience possible.
               </p>
             </section>
-
             <section className="service">
               <h3 className="h3 service-title">What i'm doing</h3>
               <ul className="service-list">
@@ -156,7 +268,7 @@ export default function Home() {
                     <h4 className="h4 service-item-title">Full Stack development (React +Node)</h4>
 
                     <p className="service-item-text">
-                      The most modern and high-quality design made at a professional level.
+                      I can help you in web development at any stage from development to deployment.
                     </p>
                   </div>
 
@@ -170,7 +282,7 @@ export default function Home() {
                     <h4 className="h4 service-item-title">BlockChain (learning phase)</h4>
 
                     <p className="service-item-text">
-                      I make high-quality photos of any category at a professional level.
+                      As a side hobby, i'm looking into this this new tech Blockhain
                     </p>
                   </div>
 
@@ -178,137 +290,48 @@ export default function Home() {
               </ul>
 
             </section>
-
             <section className="testimonials">
-
               <h3 className="h3 testimonials-title">Testimonials</h3>
-
               <ul className="testimonials-list has-scrollbar">
+                {reviews.map((each, index) => (
+                  <li className="testimonials-item" key={index} onClick={() => {
+                    setReviewModal(reviews[index])
+                  }}>
+                    <div className="content-card" data-testimonials-item="">
 
-                <li className="testimonials-item">
-                  <div className="content-card" data-testimonials-item="">
+                      <figure className="testimonials-avatar-box">
+                        <img src={each.img} alt="Daniel lewis" width="60" />
+                      </figure>
 
-                    <figure className="testimonials-avatar-box">
-                      <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar="" />
-                    </figure>
+                      <h4 className="h4 testimonials-item-title" >{each.name}</h4>
 
-                    <h4 className="h4 testimonials-item-title" data-testimonials-title="">Daniel lewis</h4>
+                      <div className="testimonials-text">
+                        <p>
+                          {each.review}
+                        </p>
+                      </div>
 
-                    <div className="testimonials-text" data-testimonials-text="">
-                      <p>
-                        Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                        lot of experience
-                        and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                        consectetur adipiscing
-                        elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                      </p>
                     </div>
-
-                  </div>
-                </li>
-
-                <li className="testimonials-item">
-                  <div className="content-card" data-testimonials-item="">
-
-                    <figure className="testimonials-avatar-box">
-                      <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar="" />
-                    </figure>
-
-                    <h4 className="h4 testimonials-item-title" data-testimonials-title="">Jessica miller</h4>
-
-                    <div className="testimonials-text" data-testimonials-text="">
-                      <p>
-                        Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                        lot of experience
-                        and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                        consectetur adipiscing
-                        elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                      </p>
-                    </div>
-
-                  </div>
-                </li>
-
-                <li className="testimonials-item">
-                  <div className="content-card" data-testimonials-item="">
-
-                    <figure className="testimonials-avatar-box">
-                      <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar="" />
-                    </figure>
-
-                    <h4 className="h4 testimonials-item-title" data-testimonials-title="">Emily evans</h4>
-
-                    <div className="testimonials-text" data-testimonials-text="">
-                      <p>
-                        Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                        lot of experience
-                        and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                        consectetur adipiscing
-                        elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                      </p>
-                    </div>
-
-                  </div>
-                </li>
-
-                <li className="testimonials-item">
-                  <div className="content-card" data-testimonials-item="">
-
-                    <figure className="testimonials-avatar-box">
-                      <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar="" />
-                    </figure>
-
-                    <h4 className="h4 testimonials-item-title" data-testimonials-title="">Henry william</h4>
-
-                    <div className="testimonials-text" data-testimonials-text="">
-                      <p>
-                        Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                        lot of experience
-                        and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                        consectetur adipiscing
-                        elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                      </p>
-                    </div>
-
-                  </div>
-                </li>
-
+                  </li>
+                ))}
               </ul>
-
             </section>
-
-
-            <div className="modal-container" data-modal-container="">
-
-              <div className="overlay" data-overlay=""></div>
-
+            <div className={`modal-container ${reviewModal ? 'active' : ''}`} >
+              <div className={`overlay ${reviewModal ? 'active' : ''}`} onClick={() => setReviewModal(null)}></div>
               <section className="testimonials-modal">
-
-                <button className="modal-close-btn" data-modal-close-btn="">
+                <button className="modal-close-btn" onClick={() => setReviewModal(null)}>
                   <ion-icon name="close-outline" role="img" className="md hydrated" aria-label="close outline"></ion-icon>
                 </button>
-
                 <div className="modal-img-wrapper">
                   <figure className="modal-avatar-box">
-                    <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img="" />
                   </figure>
-
-                  <img src="./assets/images/icon-quote.svg" alt="quote icon" />
                 </div>
 
                 <div className="modal-content">
-
-                  <h4 className="h3 modal-title" data-modal-title="">Daniel lewis</h4>
-
-                  <time dateTime="2021-06-14">14 June, 2021</time>
-
-                  <div data-modal-text="">
+                  <h4 className="h3 modal-title">{reviewModal?.name}</h4>
+                  <div>
                     <p>
-                      Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                      lot of experience
-                      and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                      consectetur adipiscing
-                      elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+                      {reviewModal?.review}
                     </p>
                   </div>
 
@@ -317,64 +340,23 @@ export default function Home() {
               </section>
 
             </div>
-
             <section className="clients">
-
               <h3 className="h3 clients-title">Clients</h3>
-
               <ul className="clients-list has-scrollbar">
-
                 <li className="clients-item">
-                  <a href="#">
-                    <img src="./assets/images/logo-1-color.png" alt="client logo" />
+                  <a href="https://arpitools.com/" target={'_blank'}>
+                    <img src="client1.png" alt="client logo" style={{ width: 75 }} />
                   </a>
                 </li>
-
-                <li className="clients-item">
-                  <a href="#">
-                    <img src="./assets/images/logo-2-color.png" alt="client logo" />
-                  </a>
-                </li>
-
-                <li className="clients-item">
-                  <a href="#">
-                    <img src="./assets/images/logo-3-color.png" alt="client logo" />
-                  </a>
-                </li>
-
-                <li className="clients-item">
-                  <a href="#">
-                    <img src="./assets/images/logo-4-color.png" alt="client logo" />
-                  </a>
-                </li>
-
-                <li className="clients-item">
-                  <a href="#">
-                    <img src="./assets/images/logo-5-color.png" alt="client logo" />
-                  </a>
-                </li>
-
-                <li className="clients-item">
-                  <a href="#">
-                    <img src="./assets/images/logo-6-color.png" alt="client logo" />
-                  </a>
-                </li>
-
               </ul>
-
             </section>
-
           </article>
 
-
           <article className={`resume ${activePage === 'resume' ? 'active' : ''}`} data-page="resume">
-
             <header>
               <h2 className="h2 article-title">Resume</h2>
             </header>
-
             <section className="timeline">
-
               <div className="title-wrapper">
                 <div className="icon-box">
                   <ion-icon name="book-outline" role="img" className="md hydrated" aria-label="book outline"></ion-icon>
@@ -382,163 +364,60 @@ export default function Home() {
 
                 <h3 className="h3">Education</h3>
               </div>
-
               <ol className="timeline-list">
-
                 <li className="timeline-item">
-
-                  <h4 className="h4 timeline-item-title">University school of the arts</h4>
-
-                  <span>2007 — 2008</span>
-
+                  <h4 className="h4 timeline-item-title">COMSATS University Islamabd</h4>
+                  <span>2013 — 2017</span>
                   <p className="timeline-text">
-                    Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
-                    quas molestias
-                    exceptur.
+                    Completed Bachelor in Computer Science
                   </p>
-
                 </li>
-
-                <li className="timeline-item">
-
-                  <h4 className="h4 timeline-item-title">New york academy of art</h4>
-
-                  <span>2006 — 2007</span>
-
-                  <p className="timeline-text">
-                    Ratione voluptatem sequi nesciunt, facere quisquams facere menda ossimus, omnis voluptas assumenda est
-                    omnis..
-                  </p>
-
-                </li>
-
-                <li className="timeline-item">
-
-                  <h4 className="h4 timeline-item-title">High school of art and design</h4>
-
-                  <span>2002 — 2004</span>
-
-                  <p className="timeline-text">
-                    Duis aute irure dolor in reprehenderit in voluptate, quila voluptas mag odit aut fugit, sed consequuntur
-                    magni dolores
-                    eos.
-                  </p>
-
-                </li>
-
               </ol>
-
             </section>
 
             <section className="timeline">
-
               <div className="title-wrapper">
                 <div className="icon-box">
                   <ion-icon name="book-outline" role="img" className="md hydrated" aria-label="book outline"></ion-icon>
                 </div>
-
                 <h3 className="h3">Experience</h3>
               </div>
-
               <ol className="timeline-list">
-
-                <li className="timeline-item">
-
-                  <h4 className="h4 timeline-item-title">Creative director</h4>
-
-                  <span>2015 — Present</span>
-
-                  <p className="timeline-text">
-                    Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas
-                    molestias
-                    exceptur.
-                  </p>
-
-                </li>
-
-                <li className="timeline-item">
-
-                  <h4 className="h4 timeline-item-title">Art director</h4>
-
-                  <span>2013 — 2015</span>
-
-                  <p className="timeline-text">
-                    Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
-                    quas molestias
-                    exceptur.
-                  </p>
-
-                </li>
-
-                <li className="timeline-item">
-
-                  <h4 className="h4 timeline-item-title">Web designer</h4>
-
-                  <span>2010 — 2013</span>
-
-                  <p className="timeline-text">
-                    Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
-                    quas molestias
-                    exceptur.
-                  </p>
-
-                </li>
-
+                {previousExperience.map((each, index) => (
+                  <li className="timeline-item" key={index}>
+                    <h4 className="h4 timeline-item-title">{each.name}</h4>
+                    <span>{each.duration}</span>
+                    <p className="timeline-text">
+                      <ul>
+                        {each.points.map((eachPoint, index) => (
+                          <li key={index}>
+                            {eachPoint}
+                          </li>
+                        ))}
+                      </ul>
+                    </p>
+                  </li>
+                ))}
               </ol>
-
             </section>
 
             <section className="skill">
-
               <h3 className="h3 skills-title">My skills</h3>
-
               <ul className="skills-list content-card">
-
-                <li className="skills-item">
-
-                  <div className="title-wrapper">
-                    <h5 className="h5">Web design</h5>
-                    <data value="80">80%</data>
-                  </div>
-
-                  <div className="skill-progress-bg">
-                    <div className="skill-progress-fill" style={{ width: '80%' }}></div>
-                  </div>
-
-                </li>
-
-                <li className="skills-item">
-
-                  <div className="title-wrapper">
-                    <h5 className="h5">Graphic design</h5>
-                    <data value="70">70%</data>
-                  </div>
-
-                  <div className="skill-progress-bg">
-                    <div className="skill-progress-fill" style={{ width: '70%' }}></div>
-                  </div>
-
-                </li>
-
-                <li className="skills-item">
-
-                  <div className="title-wrapper">
-                    <h5 className="h5">Branding</h5>
-                    <data value="90">90%</data>
-                  </div>
-
-                  <div className="skill-progress-bg">
-                    <div className="skill-progress-fill" style={{ width: '90%' }}></div>
-                  </div>
-
-                </li>
-
+                {skills.map((each, index) => (
+                  <li className="skills-item" key={index}>
+                    <div className="title-wrapper">
+                      <h5 className="h5">{each.name}</h5>
+                      <data value="80">{each.percentage}</data>
+                    </div>
+                    <div className="skill-progress-bg">
+                      <div className="skill-progress-fill" style={{ width: `${each.percentage || '0%'}` }}></div>
+                    </div>
+                  </li>
+                ))}
               </ul>
-
             </section>
-
           </article>
-
 
           <article className={`portfolio ${activePage === 'portfolio' ? 'active' : ''}`} data-page="portfolio">
 
@@ -772,7 +651,6 @@ export default function Home() {
 
           </article>
 
-
           <article className={`blog ${activePage === 'blog' ? 'active' : ''}`} data-page="blog">
 
             <header>
@@ -956,7 +834,6 @@ export default function Home() {
             </section>
 
           </article>
-
 
           <article className={`contact ${activePage === 'contact' ? 'active' : ''}`} data-page="contact">
 

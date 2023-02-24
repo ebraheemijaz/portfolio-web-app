@@ -118,10 +118,51 @@ const skills = [
   }
 ]
 
+const samples = [
+  {
+    title: 'Explore App Development with the MERN Stack',
+    subTitle: 'Linkedin Certification',
+    image: 'cert-11.jpg',
+    link: 'https://www.linkedin.com/learning/paths/become-a-mern-stack-javascript-developer'
+  },
+  {
+    title: 'Node.js Essential Training',
+    subTitle: 'Linkedin Certification',
+    image: 'cert-12.jpg',
+    link: 'https://www.linkedin.com/learning/node-js-essential-training-2'
+  },
+  {
+    title: 'Advanced NodeJs',
+    subTitle: 'Udemy Certification',
+    image: 'cert-6.jpg',
+    link: 'https://www.udemy.com/certificate/UC-ec599ec6-6261-4315-bff0-55da7f3fbfad/'
+  },
+  {
+    title: 'Python',
+    subTitle: 'Google Certification',
+    image: 'cert-1.jpg',
+    link: 'https://www.coursera.org/account/accomplishments/verify/G3RNTWEMN7CW'
+  },
+  {
+    title: 'Github',
+    subTitle: 'Google Certification',
+    image: 'cert-2.jpg',
+    link: 'https://www.coursera.org/account/accomplishments/verify/6RC9HXJF528T'
+  },
+  {
+    title: 'Cloud Mangement',
+    subTitle: 'Google Certification',
+    image: 'cert-4.jpg',
+    link: 'https://www.coursera.org/account/accomplishments/verify/35bz5chfyrks'
+  },
+]
+
 export default function Home() {
   const [activePage, setActivePage] = useState('about');
   const [showInfo, setShowInfo] = useState(false);
+  const [openSelectBox, setOpenSelectBox] = useState(false);
   const [reviewModal, setReviewModal] = useState(null);
+  const [activePortfolioTab, setActivePortfolioTab] = useState('ALL');
 
   return (
     <>
@@ -220,23 +261,15 @@ export default function Home() {
               <li className="navbar-item">
                 <button className={`navbar-link ${activePage === 'resume' ? 'active' : ''}`} onClick={() => setActivePage('resume')}>Resume</button>
               </li>
-
               <li className="navbar-item">
                 <button className={`navbar-link ${activePage === 'portfolio' ? 'active' : ''}`} onClick={() => setActivePage('portfolio')}>Portfolio</button>
               </li>
-
-              <li className="navbar-item">
-                <button className={`navbar-link ${activePage === 'blog' ? 'active' : ''}`} onClick={() => setActivePage('blog')}>Blog</button>
-              </li>
-
               <li className="navbar-item">
                 <button className={`navbar-link ${activePage === 'contact' ? 'active' : ''}`} onClick={() => setActivePage('contact')}>Contact</button>
               </li>
-
             </ul>
-
           </nav>
-          <article className={`about ${activePage === 'about' ? 'active' : ''}`} data-page="about">
+          <article className={`about ${activePage === 'about' ? 'active' : ''}`} >
             <header>
               <h2 className="h2 article-title">About me</h2>
             </header>
@@ -352,7 +385,7 @@ export default function Home() {
             </section>
           </article>
 
-          <article className={`resume ${activePage === 'resume' ? 'active' : ''}`} data-page="resume">
+          <article className={`resume ${activePage === 'resume' ? 'active' : ''}`} >
             <header>
               <h2 className="h2 article-title">Resume</h2>
             </header>
@@ -419,231 +452,95 @@ export default function Home() {
             </section>
           </article>
 
-          <article className={`portfolio ${activePage === 'portfolio' ? 'active' : ''}`} data-page="portfolio">
-
+          <article className={`portfolio ${activePage === 'portfolio' ? 'active' : ''}`} >
             <header>
               <h2 className="h2 article-title">Portfolio</h2>
             </header>
-
             <section className="projects">
-
               <ul className="filter-list">
-
                 <li className="filter-item">
-                  <button className="active" data-filter-btn="">All</button>
+                  <button
+                    onClick={() => setActivePortfolioTab('ALL')}
+                    className={`${activePortfolioTab === 'ALL' ? 'active' : ''}`}>
+                    All
+                  </button>
                 </li>
-
                 <li className="filter-item">
-                  <button data-filter-btn="">Web design</button>
+                  <button
+                    onClick={() => setActivePortfolioTab('WEB')}
+                    className={`${activePortfolioTab === 'WEB' ? 'active' : ''}`}>
+                    Web Apps
+                  </button>
                 </li>
-
                 <li className="filter-item">
-                  <button data-filter-btn="">Applications</button>
+                  <button
+                    onClick={() => setActivePortfolioTab('CERT')}
+                    className={`${activePortfolioTab === 'CERT' ? 'active' : ''}`}>
+                    Certification
+                  </button>
                 </li>
-
-                <li className="filter-item">
-                  <button data-filter-btn="">Web development</button>
-                </li>
-
               </ul>
-
-              <div className="filter-select-box">
-
-                <button className="filter-select" data-select="">
-
-                  <div className="select-value" data-selecct-value="">Select category</div>
-
+              <div className="filter-select-box" onClick={() => setOpenSelectBox(!openSelectBox)}>
+                <button className={`filter-select ${openSelectBox ? 'active' : ''}`} >
+                  <div className="select-value" >
+                    {activePortfolioTab === 'ALL' && <>All</>}
+                    {activePortfolioTab === 'WEB' && <>Web Apps</>}
+                    {activePortfolioTab === 'CERT' && <>Certification</>}
+                  </div>
                   <div className="select-icon">
                     <ion-icon name="chevron-down" role="img" className="md hydrated" aria-label="chevron down"></ion-icon>
                   </div>
-
                 </button>
-
                 <ul className="select-list">
-
                   <li className="select-item">
-                    <button data-select-item="">All</button>
+                    <button
+                      onClick={() => setActivePortfolioTab('ALL')}
+                      className={`${activePortfolioTab === 'ALL' ? 'active' : ''}`}
+                    >
+                      All
+                    </button>
                   </li>
-
                   <li className="select-item">
-                    <button data-select-item="">Web design</button>
+                    <button
+                      onClick={() => setActivePortfolioTab('WEB')}
+                      className={`${activePortfolioTab === 'WEB' ? 'active' : ''}`}
+                    >
+                      Web Apps
+                    </button>
                   </li>
-
                   <li className="select-item">
-                    <button data-select-item="">Applications</button>
+                    <button
+                      onClick={() => setActivePortfolioTab('CERT')}
+                      className={`${activePortfolioTab === 'CERT' ? 'active' : ''}`}
+                    >
+                      Certification
+                    </button>
                   </li>
-
-                  <li className="select-item">
-                    <button data-select-item="">Web development</button>
-                  </li>
-
                 </ul>
-
               </div>
 
               <ul className="project-list">
 
-                <li className="project-item  active" data-filter-item="" data-category="web development">
-                  <a href="#">
+                {samples.map((each, index) => (
+                  <li className="project-item  active">
+                    <a href={each.link} target={'_blank'}>
 
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
+                      <figure className="project-img">
+                        <div className="project-item-icon-box">
+                          <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
+                        </div>
 
-                      <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy" />
-                    </figure>
+                        <img src={each.image} />
+                        {/* <Image src={each.image} alt="finance" loading="lazy" /> */}
+                      </figure>
 
-                    <h3 className="project-title">Finance</h3>
+                      <h3 className="project-title">{each.title}</h3>
 
-                    <p className="project-category">Web development</p>
+                      <p className="project-category">{each.subTitle}</p>
 
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="web development">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-2.png" alt="orizon" loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">Orizon</h3>
-
-                    <p className="project-category">Web development</p>
-
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="web design">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">Fundo</h3>
-
-                    <p className="project-category">Web design</p>
-
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="applications">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">Brawlhalla</h3>
-
-                    <p className="project-category">Applications</p>
-
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="web design">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-5.png" alt="dsm." loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">DSM.</h3>
-
-                    <p className="project-category">Web design</p>
-
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="web design">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">MetaSpark</h3>
-
-                    <p className="project-category">Web design</p>
-
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="web development">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-7.png" alt="summary" loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">Summary</h3>
-
-                    <p className="project-category">Web development</p>
-
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="applications">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">Task Manager</h3>
-
-                    <p className="project-category">Applications</p>
-
-                  </a>
-                </li>
-
-                <li className="project-item  active" data-filter-item="" data-category="web development">
-                  <a href="#">
-
-                    <figure className="project-img">
-                      <div className="project-item-icon-box">
-                        <ion-icon name="eye-outline" role="img" className="md hydrated" aria-label="eye outline"></ion-icon>
-                      </div>
-
-                      <img src="./assets/images/project-9.png" alt="arrival" loading="lazy" />
-                    </figure>
-
-                    <h3 className="project-title">Arrival</h3>
-
-                    <p className="project-category">Web development</p>
-
-                  </a>
-                </li>
+                    </a>
+                  </li>
+                ))}
 
               </ul>
 
@@ -651,191 +548,7 @@ export default function Home() {
 
           </article>
 
-          <article className={`blog ${activePage === 'blog' ? 'active' : ''}`} data-page="blog">
-
-            <header>
-              <h2 className="h2 article-title">Blog</h2>
-            </header>
-
-            <section className="blog-posts">
-
-              <ul className="blog-posts-list">
-
-                <li className="blog-post-item">
-                  <a href="#">
-
-                    <figure className="blog-banner-box">
-                      <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" loading="lazy" />
-                    </figure>
-
-                    <div className="blog-content">
-
-                      <div className="blog-meta">
-                        <p className="blog-category">Design</p>
-
-                        <span className="dot"></span>
-
-                        <time dateTime="2022-02-23">Fab 23, 2022</time>
-                      </div>
-
-                      <h3 className="h3 blog-item-title">Design conferences in 2022</h3>
-
-                      <p className="blog-text">
-                        Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-                      </p>
-
-                    </div>
-
-                  </a>
-                </li>
-
-                <li className="blog-post-item">
-                  <a href="#">
-
-                    <figure className="blog-banner-box">
-                      <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy" />
-                    </figure>
-
-                    <div className="blog-content">
-
-                      <div className="blog-meta">
-                        <p className="blog-category">Design</p>
-
-                        <span className="dot"></span>
-
-                        <time dateTime="2022-02-23">Fab 23, 2022</time>
-                      </div>
-
-                      <h3 className="h3 blog-item-title">Best fonts every designer</h3>
-
-                      <p className="blog-text">
-                        Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
-                      </p>
-
-                    </div>
-
-                  </a>
-                </li>
-
-                <li className="blog-post-item">
-                  <a href="#">
-
-                    <figure className="blog-banner-box">
-                      <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy" />
-                    </figure>
-
-                    <div className="blog-content">
-
-                      <div className="blog-meta">
-                        <p className="blog-category">Design</p>
-
-                        <span className="dot"></span>
-
-                        <time dateTime="2022-02-23">Fab 23, 2022</time>
-                      </div>
-
-                      <h3 className="h3 blog-item-title">Design digest #80</h3>
-
-                      <p className="blog-text">
-                        Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
-                      </p>
-
-                    </div>
-
-                  </a>
-                </li>
-
-                <li className="blog-post-item">
-                  <a href="#">
-
-                    <figure className="blog-banner-box">
-                      <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy" />
-                    </figure>
-
-                    <div className="blog-content">
-
-                      <div className="blog-meta">
-                        <p className="blog-category">Design</p>
-
-                        <span className="dot"></span>
-
-                        <time dateTime="2022-02-23">Fab 23, 2022</time>
-                      </div>
-
-                      <h3 className="h3 blog-item-title">UI interactions of the week</h3>
-
-                      <p className="blog-text">
-                        Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                      </p>
-
-                    </div>
-
-                  </a>
-                </li>
-
-                <li className="blog-post-item">
-                  <a href="#">
-
-                    <figure className="blog-banner-box">
-                      <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy" />
-                    </figure>
-
-                    <div className="blog-content">
-
-                      <div className="blog-meta">
-                        <p className="blog-category">Design</p>
-
-                        <span className="dot"></span>
-
-                        <time dateTime="2022-02-23">Fab 23, 2022</time>
-                      </div>
-
-                      <h3 className="h3 blog-item-title">The forgotten art of spacing</h3>
-
-                      <p className="blog-text">
-                        Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                      </p>
-
-                    </div>
-
-                  </a>
-                </li>
-
-                <li className="blog-post-item">
-                  <a href="#">
-
-                    <figure className="blog-banner-box">
-                      <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy" />
-                    </figure>
-
-                    <div className="blog-content">
-
-                      <div className="blog-meta">
-                        <p className="blog-category">Design</p>
-
-                        <span className="dot"></span>
-
-                        <time dateTime="2022-02-23">Fab 23, 2022</time>
-                      </div>
-
-                      <h3 className="h3 blog-item-title">Design digest #79</h3>
-
-                      <p className="blog-text">
-                        Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
-                      </p>
-
-                    </div>
-
-                  </a>
-                </li>
-
-              </ul>
-
-            </section>
-
-          </article>
-
-          <article className={`contact ${activePage === 'contact' ? 'active' : ''}`} data-page="contact">
+          <article className={`contact ${activePage === 'contact' ? 'active' : ''}`} >
 
             <header>
               <h2 className="h2 article-title">Contact</h2>

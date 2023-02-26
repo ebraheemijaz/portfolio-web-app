@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Script from 'next/script'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UpworkLogo } from '@/assets/UpworkIcon';
 import { FiverrLogo } from '@/assets/FiverrLogo';
 
@@ -118,18 +118,36 @@ const skills = [
   }
 ]
 
-const samples = [
+const certs = [
   {
     title: 'Explore App Development with the MERN Stack',
     subTitle: 'Linkedin Certification',
-    image: 'cert-11.jpg',
-    link: 'https://www.linkedin.com/learning/paths/become-a-mern-stack-javascript-developer'
+    image: 'cert-11.png',
+    link: './1.pdf'
   },
   {
-    title: 'Node.js Essential Training',
+    title: 'React: Testing and Debugging',
     subTitle: 'Linkedin Certification',
-    image: 'cert-12.jpg',
-    link: 'https://www.linkedin.com/learning/node-js-essential-training-2'
+    image: 'cert-13.png',
+    link: 'https://www.linkedin.com/learning/certificates/4bed58835c05dceadffbee685872a30a9786145f5829722e1e6f2c74521e3b41'
+  },
+  {
+    title: 'React.js Essential Training (2020)',
+    subTitle: 'Linkedin Certification',
+    image: 'cert-15.png',
+    link: 'https://www.linkedin.com/learning/certificates/557a0c7a7aa4a88e12a8cf3c8032b623e9a2a4b53716ab4fb047cbd99278bb89'
+  },
+  {
+    title: 'Learning Full-Stack JavaScript Development: MongoDB, Node, and React (2016)',
+    subTitle: 'Linkedin Certification',
+    image: 'cert-14.png',
+    link: 'https://www.linkedin.com/learning/certificates/d79beae87f71609f7989555ea5631112ce6db9e674b79b8db45c2d54d713ef7e'
+  },
+  {
+    title: 'Node.js: Testing and Code Quality',
+    subTitle: 'Linkedin Certification',
+    image: 'cert-12.png',
+    link: 'https://www.linkedin.com/learning/certificates/86152b9cbeee914bedcecd83411fb17fe218c590b38b711daf94f938d79ef3b1'
   },
   {
     title: 'Advanced NodeJs',
@@ -156,13 +174,47 @@ const samples = [
     link: 'https://www.coursera.org/account/accomplishments/verify/35bz5chfyrks'
   },
 ]
+const webapps = [
+  {
+    title: 'Ecommerce',
+    subTitle: 'Web App Sample',
+    image: 'app1.png',
+    link: 'https://gorgeous-sunshine-ec47d3.netlify.app/',
+  }
+]
+
+const defaultFormData = {
+  fullname: '',
+  email: '',
+  message: ''
+}
 
 export default function Home() {
   const [activePage, setActivePage] = useState('about');
   const [showInfo, setShowInfo] = useState(false);
   const [openSelectBox, setOpenSelectBox] = useState(false);
   const [reviewModal, setReviewModal] = useState(null);
-  const [activePortfolioTab, setActivePortfolioTab] = useState('ALL');
+  const [formData, setFormData] = useState({ ...defaultFormData });
+  const [activePortfolioTab, setActivePortfolioTab] = useState('WEB');
+  const [samples, setSamples] = useState([...webapps, ...certs]);
+
+  useEffect(() => {
+    if (activePortfolioTab === 'ALL') setSamples([...webapps, ...certs])
+    if (activePortfolioTab === 'WEB') setSamples([...webapps])
+    if (activePortfolioTab === 'CERT') setSamples([...certs])
+  }, [activePortfolioTab])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      fetch('https://hooks.slack.com/services/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', {
+        method: 'POST',
+        body: JSON.stringify({ "text": `Fullname: ${formData.fullname}\nEmail: ${formData.email}\nMessage: ${formData.message}` }),
+      })
+      setFormData({ ...defaultFormData })
+    } catch (error) {
+    }
+  }
 
   return (
     <>
@@ -549,42 +601,33 @@ export default function Home() {
           </article>
 
           <article className={`contact ${activePage === 'contact' ? 'active' : ''}`} >
-
             <header>
               <h2 className="h2 article-title">Contact</h2>
             </header>
-
-            <section className="mapbox" data-mapbox="">
-              <figure>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd" width="400" height="300" loading="lazy"></iframe>
-              </figure>
-            </section>
-
             <section className="contact-form">
-
               <h3 className="h3 form-title">Contact Form</h3>
-
-              <form action="#" className="form" data-form="">
-
+              <form onSubmit={handleSubmit} className="form" >
                 <div className="input-wrapper">
-                  <input type="text" name="fullname" className="form-input" placeholder="Full name" required="" data-form-input="" />
-
-                  <input type="email" name="email" className="form-input" placeholder="Email address" required="" data-form-input="" />
+                  <input
+                    onChange={(e) => { setFormData({ ...formData, fullname: e.target.value }) }}
+                    value={formData.fullname}
+                    type="text" name="fullname" className="form-input" placeholder="Full name" required />
+                  <input
+                    onChange={(e) => { setFormData({ ...formData, email: e.target.value }) }}
+                    value={formData.email}
+                    type="email" name="email" className="form-input" placeholder="Email address" required />
                 </div>
-
-                <textarea name="message" className="form-input" placeholder="Your Message" required="" data-form-input=""></textarea>
-
-                <button className="form-btn" type="submit" disabled="" data-form-btn="">
+                <textarea
+                  onChange={(e) => { setFormData({ ...formData, message: e.target.value }) }}
+                  value={formData.message}
+                  name="message" className="form-input" placeholder="Your Message" required ></textarea>
+                <button className="form-btn" type="submit"  >
                   <ion-icon name="paper-plane" role="img" className="md hydrated" aria-label="paper plane"></ion-icon>
                   <span>Send Message</span>
                 </button>
-
               </form>
-
             </section>
-
           </article>
-
         </div>
       </main>
     </>

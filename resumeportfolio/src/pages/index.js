@@ -190,7 +190,7 @@ const defaultFormData = {
 }
 
 const SLCK = 'https://hooks.slack.com/services/'
-let SURL = SLCK + 'T01614FTCD9/B015ZGNQBN1/4HzXKUg47XL3Hv0jxr7xsz1D'
+let SURL = SLCK + 'T01614FTCD9/B04RGPW63QU/sKKWWB2WLzjkGItS2NNW3Rp4'
 
 export default function Home() {
   const [activePage, setActivePage] = useState('about');

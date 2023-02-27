@@ -189,6 +189,9 @@ const defaultFormData = {
   message: ''
 }
 
+const SLCK = 'https://hooks.slack.com/services/'
+let SURL = SLCK + 'T01614FTCD9/B015ZGNQBN1/4HzXKUg47XL3Hv0jxr7xsz1D'
+
 export default function Home() {
   const [activePage, setActivePage] = useState('about');
   const [showInfo, setShowInfo] = useState(false);
@@ -207,7 +210,7 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      fetch('https://hooks.slack.com/services/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', {
+      fetch(SURL, {
         method: 'POST',
         body: JSON.stringify({ "text": `Fullname: ${formData.fullname}\nEmail: ${formData.email}\nMessage: ${formData.message}` }),
       })

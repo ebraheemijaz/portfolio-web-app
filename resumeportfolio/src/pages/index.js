@@ -533,8 +533,8 @@ export default function Home() {
             </header>
             <section className="about-text">
               <p>
-                My name is Ebraheem, I&aposm a senior full stack developer
-                having experience more than 5 years, and I love what I do.
+                My name is Ebraheem, I'm a senior full stack developer having
+                experience more than 5 years, and I love what I do.
               </p>
               <p>
                 I started my career as a web developer for a small startup in
